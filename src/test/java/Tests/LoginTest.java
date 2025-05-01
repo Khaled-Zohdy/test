@@ -21,7 +21,7 @@ public class LoginTest extends BaseTest {
                 checkAlert().
                 clickLoginButton().
                 enterName("sjdkhsjh").
-                enterPassword("kskhkdhak").
+                enterPassword("kskhkdhaks").
                 clickLoginSubmit().
                 greetingMessage();
         Assert.assertTrue(actual.contains("Welcome"));
