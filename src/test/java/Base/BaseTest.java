@@ -48,6 +48,7 @@ public class BaseTest {
     public void takeScreenShotOnFailure(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
             String testCaseName = result.getMethod().getMethodName();
+            System.out.println("Execution Failed!");
             helper.captureScreen(testCaseName, getDriver());
         }
     }
