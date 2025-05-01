@@ -22,9 +22,24 @@ public class LoginTest extends BaseTest {
                 checkAlert().
                 clickLoginButton().
                 enterName("sjdkhsjh").
-                enterPassword("kskhkdhak").
+                enterPassword("kskhkdhaks").
                 clickLoginSubmit().
                 greetingMessage();
+        Assert.assertTrue(actual.contains("Welcome"));
+    }
+
+    @Test (description = "User should login successfully with valid Credentials")
+    public void userShouldLoggedInSuccessfully() throws InterruptedException {
+        SignupPage signupPage = new SignupPage(getDriver());
+        String actual =
+                signupPage.
+                        signup().
+                        checkAlert().
+                        clickLoginButton().
+                        enterName("sjdkhsjh").
+                        enterPassword("kskhkdhaks").
+                        clickLoginSubmit().
+                        greetingMessage();
         Assert.assertTrue(actual.contains("Welcome"));
     }
 }
