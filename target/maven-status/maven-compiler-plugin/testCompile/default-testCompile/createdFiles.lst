@@ -1,0 +1,10 @@
+Tests\SignupTest.class
+Utils\configProperties.class
+Base\BaseTest.class
+Pages\SignupPage.class
+Helper\Helper.class
+Tests\ProductTest.class
+Pages\LoginPage.class
+Pages\BasePage.class
+Tests\LoginTest.class
+Utils\configUtils.class

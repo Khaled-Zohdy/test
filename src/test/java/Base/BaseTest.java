@@ -1,25 +1,18 @@
 package Base;
 
-import io.qameta.allure.Allure;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+import Helper.Helper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.time.Duration;
 
+
 public class BaseTest {
-    protected ThreadLocal <WebDriver> driver = new ThreadLocal<>();
+    Helper helper = new Helper();
+    protected ThreadLocal <WebDriver> driver = new ThreadLocal<>() ;
 
     public void setDriver(WebDriver driver){
         this.driver.set(driver);
@@ -39,37 +32,29 @@ public class BaseTest {
                 break;
             case "firefox":
                  driver = new FirefoxDriver();
-                setDriver(driver);
+                 setDriver(driver);
                 break;
             default:
                 throw new RuntimeException("Browser name invalid");
 
         }
 
-        getDriver().manage().window().maximize();
-        getDriver().get("https://www.demoblaze.com/");
-        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-    }
-
-
-    public void takeScreenShot(String testName) throws IOException {
-        File file = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(file,new File("ScreenShots/"+testName+".png"));
-        InputStream inputStream = new FileInputStream(file);
-        Allure.addAttachment("ScreensShot",inputStream);
+        driver.manage().window().maximize();
+        driver.get("https://www.demoblaze.com/");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     @AfterMethod
-    public void capture(ITestResult result) throws IOException {
-        if (result.getStatus() == ITestResult.FAILURE){
-        String testName = result.getMethod().getMethodName();
-        System.out.println("Testcase Fails");
-        takeScreenShot(testName);
+    public void takeScreenShotOnFailure(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            String testCaseName = result.getMethod().getMethodName();
+            helper.captureScreen(testCaseName, getDriver());
         }
     }
 
-    @AfterMethod
-    public void closeWebSite() throws IOException {
+
+    @AfterMethod (dependsOnMethods = "takeScreenShotOnFailure")
+    public void closeWebSite() {
         getDriver().quit();
     }
 }

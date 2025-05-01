@@ -14,7 +14,6 @@ public class SignupTest extends BaseTest {
     @Severity(SeverityLevel.BLOCKER)
     @Test(priority = 0 , description = "User should login with valid signup credentials")
     public void userShouldSignupSuccessfully(){
-
         SignupPage signupPage = new SignupPage(getDriver());
         signupPage.signup().checkAlert();
     }

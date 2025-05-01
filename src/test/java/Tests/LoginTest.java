@@ -6,6 +6,7 @@ import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+
 @Feature("Login Feature")
 public class LoginTest extends BaseTest {
 
@@ -21,7 +22,7 @@ public class LoginTest extends BaseTest {
                 checkAlert().
                 clickLoginButton().
                 enterName("sjdkhsjh").
-                enterPassword("kskhkdhaks").
+                enterPassword("kskhkdhak").
                 clickLoginSubmit().
                 greetingMessage();
         Assert.assertTrue(actual.contains("Welcome"));

@@ -1,0 +1,1 @@
+{"uuid":"cc747fc9-0451-4cde-82d2-a9eb0b7696c1","name":"Base.BaseTest.takeScreen","children":["94f267ea-c547-45fd-bef3-c093e7b09dbc"],"description":"","befores":[],"afters":[{"name":"takeScreen","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1746119930730,"stop":1746119931178}],"start":1746119930729,"stop":1746119931178}
